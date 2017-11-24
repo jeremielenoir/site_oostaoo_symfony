@@ -18,4 +18,25 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+    /**
+     * @Route("/user/test", name="testRoleUser")
+     */
+     public function testRoleUserAction(Request $request)
+     {
+        return $this->render('exemples_roles/hello-world.html.twig');
+     }
+
+    /**
+     * @Route("/admin/test", name="testRoleAdmin")
+     */
+    public function testRoleAdminAction(Request $request)
+     {
+        $user = $this->getUser()->setEmail('modifié@mail.com');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->render('exemples_roles/hello-world-admin.html.twig');
+     }
+     
 }
