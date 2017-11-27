@@ -5,6 +5,14 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     </head>
     <body>
+               <div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+            {% endif %}
+        </div>
         
        <div class="container">
 
@@ -29,6 +37,7 @@
 
 
        </div>
+       <script type="text/javascript" src="{{ asset('jquery/jquery-1.9.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     </body>
 </html>
